@@ -109,12 +109,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d49966d0274ac24c8b4d214105b2dac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mass: 100
-  _iceFrictionCoefficient: 0.08
-  _concreteFrictionCoefficient: 0.15
-  _carpetFrictionCoefficient: 0.36
-  _groundNormalForce: 1
-  _gravitationalConstant: 0.0001
+  _mass: 1
+  _initialVelocity: {x: 0.3, y: 0, z: 0}
+  _iceFrictionCoefficient: 0.008
+  _concreteFrictionCoefficient: 0.015
+  _carpetFrictionCoefficient: 0.036
+  _groundNormalForce: 0.01
+  _gravitationalConstant: 0.001
 --- !u!54 &1684947695
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -125,7 +126,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
