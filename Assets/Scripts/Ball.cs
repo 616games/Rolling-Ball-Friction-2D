@@ -128,7 +128,14 @@ public class Ball : MonoBehaviour
         {
             _velocity = Vector3.zero;
         }
-        _transform.position += _velocity;
+
+        Vector3 _position = _transform.position += _velocity;
+        if (_position.z >= 0)
+        {
+            _position.z = 0;
+        }
+        
+        _transform.position = _position;
     }
 
     /// <summary>
@@ -136,9 +143,9 @@ public class Ball : MonoBehaviour
     /// </summary>
     private void ApplyForce(Vector3 _force)
     {
-        if (Mathf.Approximately(0.0f, _mass))
+        if (_mass <= 0.0f)
         {
-            _acceleration += _force / 1f;
+            _acceleration += _force;
             return;
         }
 
@@ -153,7 +160,7 @@ public class Ball : MonoBehaviour
         _iceFriction = new Vector3(CalculateFriction(_iceFrictionCoefficient), 0, 0);
         _concreteFriction = new Vector3(CalculateFriction(_concreteFrictionCoefficient), 0, 0);
         _carpetFriction = new Vector3(CalculateFriction(_carpetFrictionCoefficient), 0, 0);
-        _gravitationalForce = new Vector3(0, 0, _gravitationalConstant);
+        _gravitationalForce = new Vector3(0, 0, _gravitationalConstant * _mass);
         _transform = transform;
         _velocity = _initialVelocity;
     }
@@ -164,7 +171,7 @@ public class Ball : MonoBehaviour
     /// <returns></returns>
     private float CalculateFriction(float _coefficientOfFriction)
     {
-        return -.1f * _coefficientOfFriction * _groundNormalForce;
+        return -1f * _coefficientOfFriction * _groundNormalForce;
     }
     
     #endregion
